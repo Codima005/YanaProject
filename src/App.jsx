@@ -1,10 +1,10 @@
 import "./App.css";
-import { TestFunc } from "./components/render";
+import { RenderFunc } from "./components/render";
 
 function App() {
   return (
     <div className="App">
-      <TestFunc />
+      <RenderFunc />
     </div>
   );
 }
