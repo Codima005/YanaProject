@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getWordLem, getWordStem, getWordDic } from "../services/services";
+import { getWordLem, getWordStem, getWordDick } from "../services/services";
 import { Result } from "./result";
 import { Form } from "./form";
 import logo from "../img/e-learning.png"
@@ -11,7 +11,7 @@ import logoY from "../img/y-alphabet.png"
 export function RenderFunc() {
   const [lem, setLem] = useState([]);
   const [stem, setStem] = useState([]);
-  const [dic, setDic] = useState([]);
+  const [dick, setDick] = useState([]);
   const [word, setWord] = useState("");
 
   function separateWords(stringa) {
@@ -41,11 +41,11 @@ export function RenderFunc() {
     return StemArr;
   }
 
-  async function getArrElementsDic(wordArr) {
+  async function getArrElementsDick(wordArr) {
     let DicArr = [];
     for (let i = 0; i < wordArr.length; i++) {
       const element = wordArr[i];
-      let resStem = await getWordDic(element);
+      let resStem = await getWordDick(element);
       DicArr.push(resStem);
     }
 
@@ -61,11 +61,11 @@ export function RenderFunc() {
     setStem(stemArr);
   }
 
-  async function onBtnClickDic(e) {
+  async function onBtnClickDick(e) {
     e.preventDefault();
     let newArr = await separateWords(word);
-    let DicArr = await getArrElementsDic(newArr);
-    setDic(DicArr);
+    let DicArr = await getArrElementsDick(newArr);
+    setDick(DicArr);
   }
 
   function onInputChange(e) {
@@ -90,14 +90,14 @@ export function RenderFunc() {
         <Form
           onInputChange={onInputChange}
           onBtnClick={onBtnClick}
-          onBtnClickDic={onBtnClickDic}
+          onBtnClickDick={onBtnClickDick}
         />
       </div>
       <span>
         <p className="footerText">Your results:</p>
       </span>
 
-      <Result lem={lem} stem={stem} dic={dic} />
+      <Result lem={lem} stem={stem} dick={dick} />
     </div>
   );
 }

@@ -16,7 +16,7 @@ export async function getWordStem(word) {
   return data.data;
 }
 
-export async function getWordDic(word) {
+export async function getWordDick(word) {
   const result = await fetch(URL_DIC + word);
   const data = await result.json();
 

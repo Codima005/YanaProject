@@ -1,10 +1,10 @@
 import React from "react";
 
-export function Result({ lem, stem, dic }) {
+export function Result({ lem, stem, dick }) {
   return (
     <div className="resultBlock">
       <div className="resultLeft">
-        <p>LEMATIZATION</p>
+        <p>LEMMATIZATION</p>
         {lem.map((item, index) => (
           <h3 className="resultText" key={index}>
             {item}
@@ -13,7 +13,7 @@ export function Result({ lem, stem, dic }) {
       </div>
       <div className="resultCentr">
         <p>DICTIONARY</p>
-        {dic.map((item, index) => (
+        {dick.map((item, index) => (
           <h3 className="resultText" key={index}>
             {item}
           </h3>
