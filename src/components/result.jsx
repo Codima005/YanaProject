@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Result({ lem, stem }) {
+export function Result({ lem, stem, dic }) {
   return (
     <div className="resultBlock">
       <div className="resultLeft">
@@ -13,7 +13,7 @@ export function Result({ lem, stem }) {
       </div>
       <div className="resultCentr">
         <p>DICTIONARY</p>
-        {lem.map((item, index) => (
+        {dic.map((item, index) => (
           <h3 className="resultText" key={index}>
             {item}
           </h3>

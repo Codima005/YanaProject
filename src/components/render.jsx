@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { getWordLem, getWordStem } from "../services/services";
+import React, { useState } from "react";
+import { getWordLem, getWordStem, getWordDic } from "../services/services";
 import { Result } from "./result";
 import { Form } from "./form";
+import logo from "../img/e-learning.png"
+import logoA from "../img/a-alphabet.png"
+import logoN from "../img/n-alphabet.png"
+import logoP from "../img/p-alphabet.png"
+import logoY from "../img/y-alphabet.png"
 
 export function RenderFunc() {
   const [lem, setLem] = useState([]);
   const [stem, setStem] = useState([]);
+  const [dic, setDic] = useState([]);
   const [word, setWord] = useState("");
 
   function separateWords(stringa) {
-    let separator = ", ";
-    let arrWords = stringa.split(separator);
+    let arrWords = stringa.split(/[ .:;?!~,`"&|()<>{}\[\]\r\n/\\]+/);
     return arrWords;
   }
 
@@ -36,6 +41,17 @@ export function RenderFunc() {
     return StemArr;
   }
 
+  async function getArrElementsDic(wordArr) {
+    let DicArr = [];
+    for (let i = 0; i < wordArr.length; i++) {
+      const element = wordArr[i];
+      let resStem = await getWordDic(element);
+      DicArr.push(resStem);
+    }
+
+    return DicArr;
+  }
+
   async function onBtnClick(e) {
     e.preventDefault();
     let newArr = await separateWords(word);
@@ -45,20 +61,43 @@ export function RenderFunc() {
     setStem(stemArr);
   }
 
+  async function onBtnClickDic(e) {
+    e.preventDefault();
+    let newArr = await separateWords(word);
+    let DicArr = await getArrElementsDic(newArr);
+    setDic(DicArr);
+  }
+
   function onInputChange(e) {
     setWord(e.target.value);
   }
 
   return (
     <div className="mainContainer">
+      <div className="logo">
+      <img src={logo} alt="sorry" className="imgLogo" />
+      <img src={logoY} alt="sorry" className="imgLogo" />
+      <img src={logoA} alt="sorry" className="imgLogo" />
+      <img src={logoN} alt="sorry" className="imgLogo" />
+      <img src={logoA} alt="sorry" className="imgLogo" />
+      </div>
+      <div className="logo">
+      <img src={logoA} alt="sorry" className="imgLogo" />
+      <img src={logoP} alt="sorry" className="imgLogo" />
+      <img src={logoP} alt="sorry" className="imgLogo" />
+      </div>
       <div className="formClass">
-        <Form onInputChange={onInputChange} onBtnClick={onBtnClick} />
+        <Form
+          onInputChange={onInputChange}
+          onBtnClick={onBtnClick}
+          onBtnClickDic={onBtnClickDic}
+        />
       </div>
       <span>
-        <p className="footerText">Your result:</p>
+        <p className="footerText">Your results:</p>
       </span>
 
-      <Result lem={lem} stem={stem} />
+      <Result lem={lem} stem={stem} dic={dic} />
     </div>
   );
 }

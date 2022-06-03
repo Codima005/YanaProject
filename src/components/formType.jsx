@@ -1,6 +1,6 @@
 import React from "react";
 
-export function Type({ onInputChange, onBtnClick }) {
+export function Type({ onInputChange, onBtnClick, onBtnClickDic }) {
   return (
     <p className="typePlace">
       <label htmlFor="type"></label>
@@ -15,7 +15,7 @@ export function Type({ onInputChange, onBtnClick }) {
         <button className="btn btnL" onClick={onBtnClick}>
           Use methods
         </button>
-        <button className="btn btnR" onClick={onBtnClick}>
+        <button className="btn btnR" onClick={onBtnClickDic}>
           Use dictionary
         </button>
       </div>
